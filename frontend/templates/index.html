@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PriceWise | Smart Price Comparison</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="logo" onclick="showPage('home')">Price<span>Wise</span></div>
+  <nav>
+    <button onclick="showPage('home')">🏠 Home</button>
+    <button onclick="showPage('products')">🛍 Products</button>
+    <button onclick="showPage('categories')">▦ Categories</button>
+    <button onclick="showPage('decisionLab')">🧭 Decision Lab</button>
+    <button onclick="openWishlist()">♡ Wishlist <span id="wishCount">0</span></button>
+    <button onclick="openAlerts()">🔔 Price Alerts <span id="alertCount">0</span></button>
+  </nav>
+</header>
+
+<main>
+<section id="home" class="page active">
+  <div class="hero">
+    <div class="eyebrow">PRICEWISE SMART SHOPPING</div>
+    <h1>Compare more products.<br><span>Shop smarter.</span></h1>
+    <p>Browse a larger catalog, compare multiple stores, save products, set price alerts and search online.</p>
+    <div class="search-row">
+      <input id="homeSearch" placeholder="Search phones, laptops, headphones..." autocomplete="off">
+      <button class="primary" onclick="searchProducts('homeSearch')">🔎 Search</button>
+    </div>
+    <p class="hint">Press <b>Enter</b> to open the product results page. Use Next → to move through pages.</p>
+  </div>
+  <div class="stats">
+    <div><strong id="productTotal">0</strong><span>Products</span></div>
+    <div><strong>12</strong><span>Sample Stores</span></div>
+    <div><strong>Deal DNA</strong><span>Value score</span></div>
+  </div>
+</section>
+
+<section id="products" class="page">
+  <div class="page-title">
+    <div><div class="eyebrow">PRODUCT CATALOG</div><h2>All products</h2></div>
+    <div class="search-row compact">
+      <input id="productSearch" placeholder="Search products..." onkeydown="productEnter(event)">
+      <button class="primary" onclick="searchProducts('productSearch')">Search</button>
+    </div>
+  </div>
+  <div class="pager">
+    <button onclick="prevPage()">← Previous</button>
+    <span id="pageInfo"></span>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+  <div id="productGrid" class="grid"></div>
+</section>
+
+<section id="categories" class="page">
+  <div class="eyebrow">BROWSE</div><h2>Categories</h2>
+  <p class="muted">Choose a category to see its products.</p>
+  <div id="categoryGrid" class="category-grid"></div>
+</section>
+
+<section id="decisionLab" class="page">
+  <div class="eyebrow">PRICEWISE SIGNATURE FEATURE</div>
+  <h2>Decision Lab — Find your best-fit buy</h2>
+  <p class="muted">Tell PriceWise your budget. It ranks matching products using a transparent Deal DNA score, lowest effective price, rating and discount. Demo prices are sample data.</p>
+  <div class="lab-panel">
+    <label for="labBudget"><b>Your maximum budget (₹)</b></label>
+    <div class="search-row compact"><input id="labBudget" type="number" min="1" value="50000" placeholder="e.g. 50000"><button class="primary" onclick="runDecisionLab()">Find my best-fit buys</button></div>
+    <div class="lab-tip">✨ Budget Left shows the money remaining after a best offer. Deal DNA is a demo heuristic, not a guarantee of quality.</div>
+  <div class="lab-tip"><b>New: Buy-Style Match</b> — the comparison explains four different wins: lowest final cost, free delivery, biggest discount and highest store rating. One offer does not have to win every category.</div>
+  </div>
+  <div id="labSummary" class="lab-summary"></div>
+  <div id="labResults" class="grid"></div>
+</section>
+
+<section id="wishlist" class="page">
+  <div class="eyebrow">SAVED PRODUCTS</div><h2>My Wishlist</h2>
+  <p class="muted">Products you want to check later.</p>
+  <div id="wishlistGrid" class="grid"></div>
+</section>
+
+<section id="alerts" class="page">
+  <div class="eyebrow">PRICE MONITORING</div><h2>Set Price Alert</h2>
+  <div class="alert-create" id="alertCreate"><p>Select “Set Price Alert” from a product comparison.</p></div>
+  <div class="eyebrow alert-head">YOUR ALERT LIST</div>
+  <div id="alertList" class="alert-list"></div>
+</section>
+</main>
+
+<div id="modal" class="modal hidden"><div class="modal-card"><button class="close" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
